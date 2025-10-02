@@ -2,6 +2,7 @@ import { CategoryList } from "@/components/CategoryList"
 import { GameCard } from "@/components/GameCard"
 import { useGameEvents } from "@/hooks/useGameEvents"
 
+import './Home.module.scss'
 
 export default function HomePage() {
   const gameEvents = useGameEvents()

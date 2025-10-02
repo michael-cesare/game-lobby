@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import Image from "next/image";
 
-import styles from '../styles/EventFeed.module.css'
+import styles from './EventFeed.module.scss'
 
 interface Game {
   id: string
@@ -45,10 +46,12 @@ export const GameCard = () => {
           {games.map((game) => (
             <li key={game.id} className={styles.eventItem}>
               <div className={styles.gameCard}>
-                <img 
+                <Image 
                   src={game.media.thumbnail.thumbnail.src} 
                   alt={game.meta.name}
                   className={styles.gameImage}
+                  width={200}
+                  height={200}
                 />
                 <span className={styles.eventMessage}>{game.meta.name}</span>
               </div>
