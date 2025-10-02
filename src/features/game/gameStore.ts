@@ -15,7 +15,7 @@ interface GameState {
    * On receiving a game event, it adds the event to the state using the addEvent method.
    * @returns void
    */
-  connectSocket: () => void;
+  connectSocket: (games: IGame[]) => void;
   /**
    *  Disconnects from the WebSocket and cleans up any listeners to prevent memory leaks.
    *  If not connected, it does nothing.
@@ -33,26 +33,29 @@ export const useGameStore = create<GameState>((set, get) => ({
   games: [],
   events: [],
   socketConnected: false,
-  setGames: (games) => set({ games }),
+  setGames: (games) => set(() => {
+    mockSocket.updateGames(games);
+    return { games };
+  }),
   addEvent: (event) => set((state) => {
     const updated = [event, ...state.events];
     return { events: updated.slice(0, 20) }; // ✅ limit to 20 as not to grow indefinitely
   }),
   resetEvents: () => set({ events: [] }),
   
-  connectSocket: () => {
-    const { socketConnected, games, addEvent } = get();
+  connectSocket: (games) => {
+    const { socketConnected, addEvent } = get();
     if (socketConnected || games.length === 0) return;
 
     const handleMessage = (event: TGameEvent) => {
       addEvent(event);
     };
 
-    mockSocket.connect(games);
     mockSocket.onMessage(handleMessage);
+    mockSocket.connect(games);
 
     (mockSocket as any)._zustandHandler = handleMessage;
-    set({ socketConnected: true });
+    set({ socketConnected: true, games });
   },
 
   disconnectSocket: () => {

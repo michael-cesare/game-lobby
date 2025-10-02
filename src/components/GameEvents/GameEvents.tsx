@@ -20,7 +20,7 @@ export const GameEvents = () => {
     ) : (
       <ul>
         {gameEvents.map((event) => <GameEvent
-          key={`${event.gameId}-${event.timestamp}`} 
+          key={`${event.gameId}-${event.timestamp}-${Math.random().toString(36).substring(2, 15)}`} 
           event={event}
         />)}
       </ul>

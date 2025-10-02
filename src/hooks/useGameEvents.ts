@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useSelector } from "react-redux";
 
 import { selectFilteredGames } from "@/features/lobby/selectors";
@@ -16,19 +16,20 @@ import { useGameStore } from "@/features/game/gameStore";
 export function useGameEvents() {
     const games = useSelector(selectFilteredGames);
     const events = useGameStore((state) => state.events);
-    const setGames = useGameStore((s) => s.setGames);
     const connectSocket = useGameStore((s) => s.connectSocket);
     const disconnectSocket = useGameStore((s) => s.disconnectSocket);
-
+    const didConnect = useRef(false);
     useEffect(() => {
         if (games.length === 0) return;
 
-        setGames(games);
-        connectSocket();
+        if (!didConnect.current) {
+            connectSocket(games);
+            didConnect.current = true;
+        }
         return () => {
             disconnectSocket();
         };
-    }, [games, setGames, connectSocket, disconnectSocket]);
+    }, [games, connectSocket, disconnectSocket]);
 
     return events
 }
