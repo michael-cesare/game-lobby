@@ -45,6 +45,7 @@ export interface ILobbyState {
   config: IItems[]
   configAPIError: string | null;
   category: string | null;
+  PageSize: number;
 }
 
 export interface ILobbySlice {

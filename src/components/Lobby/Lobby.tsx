@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from './Lobby.module.scss'
 
-import { IGame } from '@/features/game/typings';
 import { loadedGames, isLoadingGames, gamesAPIError } from '@/features/lobby/actions';
 import { selectFilteredGames, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
 
 import { GameLi } from './GameLi';
+import { fetchAPIGames } from '@/features/game/gamesApi';
 
 export const Lobby = () => {
   const dispatch = useDispatch();
@@ -21,16 +21,13 @@ export const Lobby = () => {
     async function fetchGames() {
       dispatch(isLoadingGames(true));
       // TODO: uri supporting category filter and pagination properly
-      const response = await fetch(
-        'https://casino.api.pikakasino.com/v1/pika/en/games?pageSize=100'
-      )
-      
-      if (!response.ok) {
-        dispatch(gamesAPIError(`HTTP error! status: ${response.status}`));
-      } else {
-        const data = await response.json()
-        const items: IGame[] = data.items || [];
+      try {
+        const items = await fetchAPIGames();
         dispatch(loadedGames(items));
+      } catch (err: any) {
+        dispatch(gamesAPIError(err.message));
+      } finally {
+        dispatch(isLoadingGames(false));
       }
     }
     fetchGames()
