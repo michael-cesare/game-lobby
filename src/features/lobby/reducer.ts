@@ -10,6 +10,7 @@ import {
     configAPIError,
     gamesAPIError,
     changeFilter,
+    changedPageSize,
 } from './actions';
 
 export const filterGames = (
@@ -70,6 +71,9 @@ export const lobby = createReducer<ILobbyState>(
       .addCase(changeFilter, (state, { payload }) => {
         state.category = payload;
         filterGames(state, payload);
+      })
+      .addCase(changedPageSize, (state, { payload }) => {
+        state.PageSize = payload;
       }); 
   }
 );

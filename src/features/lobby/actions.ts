@@ -12,3 +12,5 @@ export const configAPIError = createAction<string>("lobby/configAPIError");
 export const isLoadingConfig = createAction<boolean>("lobby/isLoadingConfig");
 
 export const changeFilter = createAction<string>("lobby/changeFilter");
+
+export const changedPageSize = createAction<number>("lobby/changedPageSize");

@@ -8,5 +8,6 @@ export const initialState: ILobbyState = {
     config: [],
     gameAPIError: null,
     configAPIError: null,
-    category: null
+    category: null,
+    PageSize: 100,
 };
