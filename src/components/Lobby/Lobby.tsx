@@ -20,6 +20,7 @@ export const Lobby = () => {
     // TODO: implement enhenced fetch utility for reusing together with cancellation of fetch on unmount
     async function fetchGames() {
       dispatch(isLoadingGames(true));
+      // TODO: 
       const response = await fetch(
         'https://casino.api.pikakasino.com/v1/pika/en/games?pageSize=100'
       )

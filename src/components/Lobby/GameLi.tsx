@@ -23,6 +23,7 @@ export const GameLi = ( props: IOwnProps ) => {
           height={200}
         />
         <span className={styles.eventMessage}>{game.meta.name}</span>
+        <span>{game.meta.category}</span>
       </div>
     </li>
   )

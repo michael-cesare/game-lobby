@@ -5,6 +5,8 @@ import { IItems } from '@/features/lobby/typings';
 import { loadedConfig, isLoadingConfig, configAPIError } from '@/features/lobby/actions';
 import { selectConfig, selectConfigAPIError, selectIsLoadingConfig } from '@/features/lobby/selectors';
 
+import { CategoryTab } from './CategoryTab';
+
 interface IOwnProps {
   className?: string;
   style?: CSSProperties;
@@ -43,9 +45,10 @@ export const CategoryList = (props: IOwnProps) => {
       ) : (
         <ul>
           {categories.map((category) => (
-            <li key={category.id}>
-              {category.name.en}
-            </li>
+            <CategoryTab
+              key={category.id}
+              category={category}
+            />
           ))}
         </ul>
       )}

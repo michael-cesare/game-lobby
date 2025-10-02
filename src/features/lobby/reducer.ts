@@ -1,4 +1,4 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer, Draft } from "@reduxjs/toolkit";
 
 import { ILobbyState } from "./typings";
 import { initialState } from "./constants";
@@ -9,7 +9,19 @@ import {
     isLoadingGames,
     configAPIError,
     gamesAPIError,
+    changeFilter,
 } from './actions';
+
+export const filterGames = (
+  state: Draft<ILobbyState>,
+  category: string | undefined,
+): void => {
+  if (category) {
+    const filterGames = state.games.filter((game) => game.meta?.category.includes(category));
+    // TODO - optimize filtered result to avoid unnecessary state updates and re-renders
+    state.games = filterGames;
+  }
+};
 
 export const lobby = createReducer<ILobbyState>(
   initialState,
@@ -42,6 +54,14 @@ export const lobby = createReducer<ILobbyState>(
       .addCase(loadedGames, (state, { payload }) => {
         state.games = payload;
         state.isLoadingGames = false;
-      });
+        // TODO - send Category in games API properly as to Apply filter from BE side
+        if (state.category) {
+          filterGames(state, state.category);
+        }
+      })
+      .addCase(changeFilter, (state, { payload }) => {
+        state.category = payload;
+        filterGames(state, payload);
+      }); 
   }
 );

@@ -41,6 +41,7 @@ export interface ILobbyState {
   isLoadingConfig: boolean;
   config: IItems[]
   configAPIError: string | null;
+  category: string | null;
 }
 
 export interface ILobbySlice {
