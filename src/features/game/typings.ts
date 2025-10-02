@@ -17,6 +17,9 @@ export interface IGame {
     description: string,
     slug: string,
     category: string,
+    collections: string[],
+    isNew: boolean,
+    isLiveGame: boolean,
   }
   media: {
     thumbnail: {

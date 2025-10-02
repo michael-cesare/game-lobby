@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { useGameEvents } from "@/hooks/useGameEvents"
+import { GameEvent } from './GameEvent'
 
 export const GameEvents = () => {
   const gameEvents = useGameEvents()
@@ -18,12 +19,11 @@ export const GameEvents = () => {
       <p>No events yet</p>
     ) : (
       <ul>
-        {gameEvents.map((event, index) => (
-          <li key={index} style={{ marginBottom: "0.5rem" }}>
-            {event.type}- Game ID: {event.gameId}
-          </li>
-        ))}
+        {gameEvents.map((event) => <GameEvent
+          key={`${event.gameId}-${event.timestamp}`} 
+          event={event}
+        />)}
       </ul>
     )}
   </div>
-}
+} 

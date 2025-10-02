@@ -8,6 +8,7 @@ import { TGameEvent } from "@/features/game/typings"
 class MockSocket {
     private interval?: NodeJS.Timeout
     private listeners: ((event: TGameEvent) => void)[] = []
+    /** Asserts that interval is set once */
     private isConnected = false
 
     connect(games: { id: string }[]) {
@@ -22,7 +23,7 @@ class MockSocket {
 
             const event: TGameEvent = { type, gameId: game.id, timestamp: Date.now() }
             this.listeners.forEach(cb => cb(event))
-        }, 15000)
+        }, 10000)
     }
 
     onMessage(callback: (event: TGameEvent) => void) {

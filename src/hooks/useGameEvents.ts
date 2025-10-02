@@ -1,28 +1,26 @@
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux";
+
 import { mockSocket } from "../services/socket"
 import { TGameEvent } from "@/features/game/typings"
-
-
-// The games are hardcoded for now, but should be fetched from the API
-const mockGames = [
-    { id: "1", gameText: "Game 1" },
-    { id: "2", gameText: "Game 2" },
-    { id: "3", gameText: "Game 3" },
-]
+import { selectFilteredGames } from "@/features/lobby/selectors";
+import { useGameStore } from "@/features/game/gameStore";
 
 export function useGameEvents() {
-    const [events, setEvents] = useState<TGameEvent[]>([])
+    const games = useSelector(selectFilteredGames);
+    const addEvent = useGameStore((state) => state.addEvent);
+    const events = useGameStore((state) => state.events);
 
     useEffect(() => {
-        if (mockGames.length === 0) {
+        if (games.length === 0) {
             return
         }
 
         const handleMessage = (event: TGameEvent) => {
-            setEvents((prev) => [event, ...prev])
+            addEvent(event);
         }
 
-        mockSocket.connect(mockGames)
+        mockSocket.connect(games)
         mockSocket.onMessage(handleMessage)
 
         return () => {
@@ -32,7 +30,7 @@ export function useGameEvents() {
                 mockSocket.disconnect()
             }
         }
-    }, [])
+    }, [games, addEvent]);
 
     return events
 }
