@@ -1,8 +1,10 @@
 import { IGame } from '@/features/game/typings';
+import { isEmpty } from '@/utils/primitive';
 
-export async function fetchAPIGames(pageSize = 100): Promise<IGame[]> {
+export async function fetchAPIGames(pageSize = 100, search = ''): Promise<IGame[]> {
+  const searchParam = isEmpty(search) ? '' : `&search=${search}`;
   const response = await fetch(
-    `https://casino.api.pikakasino.com/v1/pika/en/games?pageSize=${pageSize}`
+    `https://casino.api.pikakasino.com/v1/pika/en/games?pageSize=${pageSize}${searchParam}`,
   );
 
   if (!response.ok) {
