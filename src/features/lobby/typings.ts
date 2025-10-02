@@ -35,7 +35,10 @@ export interface IConfigLobby {
 export interface ILobbyState {
   /** Lobby is loading game list */
   isLoadingGames: boolean;
+  /** List of games loaded in lobby */
   games: IGame[];
+  /** List of games after applying filter on FE side */
+  filteredGames: IGame[];
   gameAPIError: string | null;
   /** Lobby is loading config */
   isLoadingConfig: boolean;
