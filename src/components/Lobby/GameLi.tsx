@@ -3,10 +3,10 @@ import Image from "next/image";
 
 import styles from './GameLi.module.scss'
 
-import { Game } from '@/features/game/typings';
+import { IGame } from '@/features/game/typings';
 
 interface IOwnProps {
-  game: Game,
+  game: IGame,
 }
 
 export const GameLi = ( props: IOwnProps ) => {

@@ -1,37 +1,34 @@
-import { CSSProperties, useState, useEffect } from 'react';
+import { CSSProperties, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 
-interface OwnProps {
+import { IItems } from '@/features/lobby/typings';
+import { loadedConfig, isLoadingConfig, configAPIError } from '@/features/lobby/actions';
+import { selectConfig, selectConfigAPIError, selectIsLoadingConfig } from '@/features/lobby/selectors';
+
+interface IOwnProps {
   className?: string;
   style?: CSSProperties;
 }
 
-interface Category {
-  id: string;
-  name: {
-    en: string;
-    pt: string;
-  };
-  type: string;
-}
-
-export const CategoryList = ({ className, style }: OwnProps) => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export const CategoryList = (props: IOwnProps) => {
+  const { className, style } = props;
+  const dispatch = useDispatch();
+  const categories = useSelector(selectConfig);
+  const error = useSelector(selectConfigAPIError);
+  const loading = useSelector(selectIsLoadingConfig);
 
   useEffect(() => {
     async function fetchCategories() {
-      setLoading(true);
-      setError(null);
+      dispatch(isLoadingConfig(true));
       const response = await fetch('https://casino.api.pikakasino.com/v1/pika/config');
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        dispatch(configAPIError(`HTTP error! status: ${response.status}`));
+      } else {
+        const data = await response.json();
+        const lobbyCategories: IItems[] = data.menu?.lobby?.items || [];
+        dispatch(loadedConfig(lobbyCategories));
       }
-      const data = await response.json();
-      const lobbyCategories = data.menu?.lobby?.items || [];
-      setCategories(lobbyCategories);
-      setLoading(false);
     }
     fetchCategories();
   }, []);
@@ -42,7 +39,7 @@ export const CategoryList = ({ className, style }: OwnProps) => {
       {loading ? (
         <p>Loading categories...</p>
       ) : error ? (
-        <p>Error loading categories</p>
+        <p>Error loading categories: {error}</p>
       ) : (
         <ul>
           {categories.map((category) => (
