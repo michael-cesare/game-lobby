@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { TotalSize } from './TotalSize';
-import { CountField } from './countField';
+import { CountField } from './CountField';
 
 export const PageSize = () => {
   return (

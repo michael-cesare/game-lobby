@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { mockSocket, GameEvent } from "../services/socket"
+import { mockSocket } from "../services/socket"
+import { TGameEvent } from "@/features/game/typings"
 
 
 // The games are hardcoded for now, but should be fetched from the API
@@ -10,14 +11,14 @@ const mockGames = [
 ]
 
 export function useGameEvents() {
-    const [events, setEvents] = useState<GameEvent[]>([])
+    const [events, setEvents] = useState<TGameEvent[]>([])
 
     useEffect(() => {
         if (mockGames.length === 0) {
             return
         }
 
-        const handleMessage = (event: GameEvent) => {
+        const handleMessage = (event: TGameEvent) => {
             setEvents((prev) => [event, ...prev])
         }
 
