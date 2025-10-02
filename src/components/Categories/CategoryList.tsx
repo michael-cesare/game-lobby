@@ -1,6 +1,6 @@
 import { CSSProperties, useState, useEffect } from 'react';
 
-interface CategoryListProps {
+interface OwnProps {
   className?: string;
   style?: CSSProperties;
 }
@@ -14,7 +14,7 @@ interface Category {
   type: string;
 }
 
-export const CategoryList = ({ className, style }: CategoryListProps) => {
+export const CategoryList = ({ className, style }: OwnProps) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
