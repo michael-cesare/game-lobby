@@ -5,13 +5,13 @@ import styles from './Lobby.module.scss'
 
 import { IGame } from '@/features/game/typings';
 import { loadedGames, isLoadingGames, gamesAPIError } from '@/features/lobby/actions';
-import { selectGames, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
+import { selectFilteredGames, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
 
 import { GameLi } from './GameLi';
 
 export const Lobby = () => {
   const dispatch = useDispatch();
-  const games = useSelector(selectGames);
+  const games = useSelector(selectFilteredGames);
   const error = useSelector(selectGamesAPIError);
   const loading = useSelector(selectIsLoadingGames);
   
@@ -20,6 +20,7 @@ export const Lobby = () => {
     // TODO: implement enhenced fetch utility for reusing together with cancellation of fetch on unmount
     async function fetchGames() {
       dispatch(isLoadingGames(true));
+      // TODO: uri supporting category filter and pagination properly
       const response = await fetch(
         'https://casino.api.pikakasino.com/v1/pika/en/games?pageSize=100'
       )

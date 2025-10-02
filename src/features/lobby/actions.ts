@@ -10,3 +10,5 @@ export const isLoadingGames = createAction<boolean>("lobby/isLoadingGames");
 export const loadedConfig = createAction<IItems[]>("lobby/loadedConfig");
 export const configAPIError = createAction<string>("lobby/configAPIError");
 export const isLoadingConfig = createAction<boolean>("lobby/isLoadingConfig");
+
+export const changeFilter = createAction<string>("lobby/changeFilter");

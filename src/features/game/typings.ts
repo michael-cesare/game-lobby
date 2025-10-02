@@ -12,7 +12,11 @@ export type TGameEvent = {
 export interface IGame {
   id: string
   meta: {
-    name: string
+    name: string,
+    title: string,
+    description: string,
+    slug: string,
+    category: string,
   }
   media: {
     thumbnail: {

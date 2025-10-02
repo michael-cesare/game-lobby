@@ -1,6 +1,7 @@
 import { ILobbySlice } from "./typings";
 
 export const selectGames = (state: ILobbySlice) => state.lobby.games;
+export const selectFilteredGames = (state: ILobbySlice) => state.lobby.filteredGames;
 export const selectGamesAPIError = (state: ILobbySlice) => state.lobby.gameAPIError;
 export const selectIsLoadingGames = (state: ILobbySlice) =>
   state.lobby.isLoadingGames === true;
