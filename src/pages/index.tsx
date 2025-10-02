@@ -1,33 +1,23 @@
-import { CategoryList } from "@/components/CategoryList"
-import { GameCard } from "@/components/GameCard"
-import { useGameEvents } from "@/hooks/useGameEvents"
+import { Provider } from "react-redux";
 
 import './Home.module.scss'
 
-export default function HomePage() {
-  const gameEvents = useGameEvents()
+import { store } from "@/redux/createStore";
 
+import { CategoryList } from "@/components/Categories"
+import { Lobby } from "@/components/Lobby"
+import { GameEvents } from "@/components/GameEvents"
+
+export default function HomePage() {
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Casino Games Lobby</h1>     
-      <CategoryList style={{ marginBottom: "2rem" }} />  
-      <h2>Available Games</h2>
-      <GameCard />
-      
-      <div style={{ marginTop: "2rem", padding: "1rem", border: "1px solid #ccc", borderRadius: "8px" }}>
-        <h3>Live Game Events ({gameEvents.length})</h3>
-        {gameEvents.length === 0 ? (
-          <p>No events yet</p>
-        ) : (
-          <ul>
-            {gameEvents.map((event, index) => (
-              <li key={index} style={{ marginBottom: "0.5rem" }}>
-               {event.type}- Game ID: {event.gameId} 
-              </li>
-            ))}
-          </ul>
-        )}
+    <Provider store={store}>
+      <div style={{ padding: "2rem" }}>
+        <h1>Casino Games Lobby</h1>     
+        <CategoryList style={{ marginBottom: "2rem" }} />  
+        <h2>Available Games</h2>
+        <Lobby />
+        <GameEvents />
       </div>
-    </div>
+    </Provider>
   )
 }

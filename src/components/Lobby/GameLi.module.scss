@@ -1,0 +1,33 @@
+.gameLi {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f3f4;
+  gap: 12px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .gameCard {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .gameImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #e1e5e9;
+  }
+
+  .eventMessage {
+    font-weight: 500;
+    color: #333;
+    flex: 1;
+  }
+
+}
