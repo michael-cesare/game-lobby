@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { createWrapper } from "next-redux-wrapper";
 
 import { rootReducer } from "./rootReducer";
 
@@ -10,15 +11,17 @@ const standardMiddleware = () => (next: any) => (action: any) => {
   console.log("anomaly dispatching:", action);
 };
 
-export const store = configureStore({
+// Factory for creating a new store
+export const makeStore = () => configureStore({
   reducer: rootReducer,
-  preloadedState: {},
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(standardMiddleware),
 });
 
 // Type helpers
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch'];
 
-export default store;
+// Next.js wrapper
+export const wrapper = createWrapper<AppStore>(makeStore, { debug: true  });

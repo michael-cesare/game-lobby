@@ -1,4 +1,4 @@
-import React, { useMemo  } from 'react'
+import React, { useEffect, useMemo  } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import throttle from "lodash.throttle";
 
@@ -22,7 +22,16 @@ export const GameNameField = () => {
     [dispatch, pageSize]
   );
 
+  useEffect(() => {
+    return () => throttledSearch.cancel();
+  }, [throttledSearch]);
+
   return (
-  <input type="text" defaultValue="" onBlur={(e) => throttledSearch(e.target.value)} />
+   <input
+      type="text"
+      defaultValue=""
+      placeholder="Search games..."
+      onChange={(e) => throttledSearch(e.target.value)}
+    />
   )
 }

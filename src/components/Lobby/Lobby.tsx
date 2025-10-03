@@ -3,19 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from './Lobby.module.scss'
 
-import type { AppDispatch } from '@/redux/createStore';
-
-import { selectFilteredGames, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
+import { AppDispatch } from '@/redux/createStore';
 import { searchGames } from '@/features/game/gamesApi';
+import { selectFilteredGames, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
 import { GameLi } from './GameLi';
 
 export const Lobby = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const games = useSelector(selectFilteredGames);
   const error = useSelector(selectGamesAPIError);
   const loading = useSelector(selectIsLoadingGames);
-  // initial load of games
+  const dispatch = useDispatch<AppDispatch>();
+
   useEffect(() => {
+    // SSR Hydration issue workaround - fetch config on client as data is too big to handle hydration
     dispatch(searchGames());
   }, [dispatch]);
 
