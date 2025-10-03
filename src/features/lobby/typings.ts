@@ -14,11 +14,6 @@ export interface IItems {
    * { "en": "Popular", "fi": "Pelatuimmat" } */
   name: Record<string, string>
   /**
-   * Localized paths
-   * @example
-   * { "en": "/casino/most-popular", "fi": null } */
-  paths: Record<string, string | null>
-  /**
    * Type of filter, e.g. "categoryFilter", "liveCategoryRows"
    */
   type: string
