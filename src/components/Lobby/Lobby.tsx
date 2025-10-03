@@ -16,8 +16,10 @@ export const Lobby = () => {
 
   useEffect(() => {
     // SSR Hydration issue workaround - fetch config on client as data is too big to handle hydration
-    dispatch(searchGames());
-  }, [dispatch]);
+    if (games.length === 0) {
+      dispatch(searchGames());
+    }
+  }, [games, dispatch]);
 
   return (
     <div className={styles.eventFeed}>

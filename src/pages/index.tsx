@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { PropsWithChildren } from 'react';
 
 import './Home.module.scss'
 
@@ -12,23 +12,19 @@ import { SearchForm } from "@/components/SearchForm";
 import { fetchAPIGames } from '@/features/game/gamesApi';
 import { gamesAPIError, loadedConfig, loadedGames } from '@/features/lobby/actions';
 import { fetchCategories } from '@/features/lobby/configApi';
+import { selectConfigLoaded } from '@/features/lobby/selectors';
+import { useSelector } from 'react-redux';
 
 /**
  * A higher order component to prevent hydration errors
  */
 const GamesHOC = ({ children }: PropsWithChildren ) => {
-  const [isMounted, setIsMounted] = useState<boolean>(false);
   // ! IMPORTANT - config is way to big that it causes hydration errors!
   // just check if component is mounted on client
   // Get preloaded data from Redux
   // const gamesLoaded = useSelector(selectGamesLoaded);
-  // const configLoaded = useSelector(selectConfigLoaded);
-  // Render only when both games and config are loaded
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
+  const configLoaded = useSelector(selectConfigLoaded);
+  if (!configLoaded) {
     return <p>Loading...</p>;
   }
   return <>{children}</>;
@@ -37,14 +33,12 @@ const GamesHOC = ({ children }: PropsWithChildren ) => {
 export const HomePage = () => {
   return (
     <div style={{ padding: "2rem" }}>
-      <GamesHOC>
-        <h1>Casino Games Lobby</h1>     
-        <CategoryList style={{ marginBottom: "2rem" }} />  
-        <AvailableGames />
-        <Lobby />
-        <SearchForm />
-        <GameEvents />
-      </GamesHOC>
+      <h1>Casino Games Lobby</h1>     
+      <CategoryList style={{ marginBottom: "2rem" }} />  
+      <AvailableGames />
+      <Lobby />
+      <SearchForm />
+      <GameEvents />
     </div>
   )
 }
