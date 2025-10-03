@@ -9,5 +9,5 @@ export const initialState: ILobbyState = {
     gameAPIError: null,
     configAPIError: null,
     category: null,
-    PageSize: 100,
+    searchQuery: { name: '', pageSize: 100 },
 };

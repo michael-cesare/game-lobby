@@ -10,7 +10,6 @@ export const GameNameField = () => {
   const pageSize = useSelector(selectPageSize);
 
   const handleOnChange = useCallback(( newValue: string ) => {
-    // dispatch(changedGameName(newValue));
     dispatch(searchGames(pageSize, newValue));
   }, [pageSize, dispatch]);
 
