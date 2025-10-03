@@ -15,7 +15,19 @@ export async function fetchCategories(): Promise<IItems[]> {
   }
 
   const data = await response.json();
-  const lobbyCategories: IItems[] = data.menu?.lobby?.items || [];
+  const rawItems: IItems[] = data.menu?.lobby?.items || [];
+  
+  // slim version, mapped to IItems only as to reduce hydration on client side
+  // we don't need all the data from the config for categories
+  const lobbyCategories: IItems[] = rawItems.map((item: any) => ({
+    id: item.id,
+    image: {
+      alt: item.image?.alt || "", // only alt, not the whole image object
+    },
+    name: item.name || {},
+    type: item.type || "",
+    categoryFilter: item.categoryFilter || undefined,
+  }));
   return lobbyCategories;
 }
 

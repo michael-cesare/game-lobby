@@ -30,7 +30,26 @@ export async function fetchAPIGames(pageSize = 100, search = ''): Promise<IGame[
   }
 
   const data = await response.json();
-  return data.items || [];
+  // Slim game objects to IGame only
+  const slimGames: IGame[] = (data.items || []).map((item: any) => ({
+    id: item.id,
+    meta: {
+      name: item.meta?.name || "",
+      title: item.meta?.title || "",
+      description: item.meta?.description || "",
+      category: item.meta?.category || "",
+      collections: item.meta?.collections || [],
+    },
+    media: {
+      thumbnail: {
+        thumbnail: {
+          src: item.media?.thumbnail?.thumbnail?.src || "",
+        },
+      },
+    },
+  }));
+
+  return slimGames;
 }
 
 /**
