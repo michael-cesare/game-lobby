@@ -1,5 +1,4 @@
-import { PropsWithChildren } from 'react';
-import { useSelector } from 'react-redux';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 import './Home.module.scss'
 
@@ -13,17 +12,23 @@ import { SearchForm } from "@/components/SearchForm";
 import { fetchAPIGames } from '@/features/game/gamesApi';
 import { gamesAPIError, loadedConfig, loadedGames } from '@/features/lobby/actions';
 import { fetchCategories } from '@/features/lobby/configApi';
-import { selectConfigLoaded, selectGamesLoaded } from '@/features/lobby/selectors';
 
 /**
  * A higher order component to prevent hydration errors
  */
 const GamesHOC = ({ children }: PropsWithChildren ) => {
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  // ! IMPORTANT - config is way to big that it causes hydration errors!
+  // just check if component is mounted on client
   // Get preloaded data from Redux
-  const gamesLoaded = useSelector(selectGamesLoaded);
-  const configLoaded = useSelector(selectConfigLoaded);
+  // const gamesLoaded = useSelector(selectGamesLoaded);
+  // const configLoaded = useSelector(selectConfigLoaded);
   // Render only when both games and config are loaded
-  if (!gamesLoaded || !configLoaded) {
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
     return <p>Loading...</p>;
   }
   return <>{children}</>;

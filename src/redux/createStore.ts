@@ -24,4 +24,4 @@ export type RootState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];
 
 // Next.js wrapper
-export const wrapper = createWrapper<AppStore>(makeStore, { debug: false });
+export const wrapper = createWrapper<AppStore>(makeStore, { debug: true  });

@@ -1,8 +1,10 @@
-import React from 'react'
-import { useSelector } from "react-redux";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from './Lobby.module.scss'
 
+import { AppDispatch } from '@/redux/createStore';
+import { searchGames } from '@/features/game/gamesApi';
 import { selectFilteredGames, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
 import { GameLi } from './GameLi';
 
@@ -10,6 +12,12 @@ export const Lobby = () => {
   const games = useSelector(selectFilteredGames);
   const error = useSelector(selectGamesAPIError);
   const loading = useSelector(selectIsLoadingGames);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    // SSR Hydration issue workaround - fetch config on client as data is too big to handle hydration
+    dispatch(searchGames());
+  }, [dispatch]);
 
   return (
     <div className={styles.eventFeed}>

@@ -1,9 +1,11 @@
-import { CSSProperties } from 'react';
-import { useSelector } from "react-redux";
+import { CSSProperties, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 
 import { selectConfig, selectConfigAPIError, selectIsLoadingConfig } from '@/features/lobby/selectors';
 
 import { CategoryTab } from './CategoryTab';
+import { AppDispatch } from '@/redux/createStore';
+import { getConfig } from '@/features/lobby/configApi';
 
 interface IOwnProps {
   className?: string;
@@ -12,9 +14,15 @@ interface IOwnProps {
 
 export const CategoryList = (props: IOwnProps) => {
   const { className, style } = props;
+  const dispatch = useDispatch<AppDispatch>();
   const categories = useSelector(selectConfig);
   const error = useSelector(selectConfigAPIError);
   const loading = useSelector(selectIsLoadingConfig);
+
+  useEffect(() => {
+    // SSR Hydration issue workaround - fetch config on client as data is too big to handle hydration
+    dispatch(getConfig());
+  }, [dispatch]);
 
   return (
     <div className={className} style={style}>
