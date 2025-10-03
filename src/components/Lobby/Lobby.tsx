@@ -1,23 +1,15 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react'
+import { useSelector } from "react-redux";
 
 import styles from './Lobby.module.scss'
 
-import type { AppDispatch } from '@/redux/createStore';
-
 import { selectFilteredGames, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
-import { searchGames } from '@/features/game/gamesApi';
 import { GameLi } from './GameLi';
 
 export const Lobby = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const games = useSelector(selectFilteredGames);
   const error = useSelector(selectGamesAPIError);
   const loading = useSelector(selectIsLoadingGames);
-  // initial load of games
-  useEffect(() => {
-    dispatch(searchGames());
-  }, [dispatch]);
 
   return (
     <div className={styles.eventFeed}>

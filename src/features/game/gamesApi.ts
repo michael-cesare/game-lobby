@@ -21,8 +21,9 @@ export async function fetchAPIGames(pageSize = 100, search = ''): Promise<IGame[
   // also support query params properly
   // e.g. const api = axios.create({ baseURL: API_BASE, headers: { 'Authorization
   const response = await fetch(
-    `${API_BASE}/${lang}/games${pageSizeParam}${searchParam}`,
-  );
+    `${API_BASE}/${lang}/games${pageSizeParam}${searchParam}`, {
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
@@ -38,15 +39,14 @@ export async function fetchAPIGames(pageSize = 100, search = ''): Promise<IGame[
  * @param search - text to search in game names and attributes
  * @returns - thunk action
  */
-export const searchGames = (pageSize = 100, search = '') => {
-  return (dispatch: AppDispatch) => {
+export const searchGames = (pageSize: number = 100, search: string = "") =>
+  async (dispatch: AppDispatch) => {
     dispatch(queryGames({ name: search, pageSize }));
-    fetchAPIGames(pageSize, search)
-      .then((items) => {
-        dispatch(loadedGames(items));
-      })
-      .catch((err) => {
-        dispatch(gamesAPIError(err.message));
-      });
-  }
-}
+
+    try {
+      const items = await fetchAPIGames(pageSize, search);
+      dispatch(loadedGames(items));
+    } catch (error: any) {
+      dispatch(gamesAPIError(error.message));
+    }
+  };
