@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSelector } from "react-redux";
 
-import { selectPageSize } from '@/features/lobby/selectors';
+import { selectResultCount } from '@/features/lobby/reselectors';
 
 export const TotalSize = () => {
-  const pageSize = useSelector(selectPageSize);
+  const resultCount = useSelector(selectResultCount);
 
   return (
-    <span>{pageSize}</span>
+    <span>{resultCount}</span>
   )
 }

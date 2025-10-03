@@ -6,11 +6,10 @@ import {
     loadedConfig,
     loadedGames,
     isLoadingConfig,
-    isLoadingGames,
+    queryGames,
     configAPIError,
     gamesAPIError,
     changeFilter,
-    changedPageSize,
 } from './actions';
 
 export const filterGames = (
@@ -48,11 +47,10 @@ export const lobby = createReducer<ILobbyState>(
         state.config = payload;
         state.isLoadingConfig = false;
       })
-      .addCase(isLoadingGames, (state, { payload }) => {
-        state.isLoadingGames = payload;
-        if (payload) {
-            state.gameAPIError = null;
-        }
+      .addCase(queryGames, (state, { payload }) => {
+        state.isLoadingGames = true;
+        state.gameAPIError = null;
+        state.searchQuery = payload;
       })
       .addCase(gamesAPIError, (state, { payload }) => {
         state.gameAPIError = payload;
@@ -71,9 +69,6 @@ export const lobby = createReducer<ILobbyState>(
       .addCase(changeFilter, (state, { payload }) => {
         state.category = payload;
         filterGames(state, payload);
-      })
-      .addCase(changedPageSize, (state, { payload }) => {
-        state.PageSize = payload;
       }); 
   }
 );

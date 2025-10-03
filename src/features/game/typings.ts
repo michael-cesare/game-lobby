@@ -29,3 +29,11 @@ export interface IGame {
     }
   }
 }
+
+/**
+ * Search game payload
+ */
+export interface ISearchGame {
+  name: string
+  pageSize?: number
+}

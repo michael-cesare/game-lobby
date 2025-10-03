@@ -11,4 +11,5 @@ export const selectConfigAPIError = (state: ILobbySlice) => state.lobby.configAP
 export const selectIsLoadingConfig = (state: ILobbySlice) =>
   state.lobby.isLoadingConfig === true;
 
-export const selectPageSize = (state: ILobbySlice) => state.lobby.PageSize;
+export const selectPageSize = (state: ILobbySlice) => state.lobby.searchQuery?.pageSize || 100;
+export const selectSearchName = (state: ILobbySlice) => state.lobby.searchQuery?.name || '';

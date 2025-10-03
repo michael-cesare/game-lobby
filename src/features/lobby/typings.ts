@@ -1,4 +1,4 @@
-import { IGame } from "../game/typings"
+import { IGame, ISearchGame } from "../game/typings"
 
 /**
  * Lobby items from configuration API
@@ -45,7 +45,7 @@ export interface ILobbyState {
   config: IItems[]
   configAPIError: string | null;
   category: string | null;
-  PageSize: number;
+  searchQuery: ISearchGame | null;
 }
 
 export interface ILobbySlice {
