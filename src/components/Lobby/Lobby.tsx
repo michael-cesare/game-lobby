@@ -3,35 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from './Lobby.module.scss'
 
-import { loadedGames, isLoadingGames, gamesAPIError } from '@/features/lobby/actions';
-import { selectFilteredGames, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
+import type { AppDispatch } from '@/redux/createStore';
 
+import { selectFilteredGames, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
+import { searchGames } from '@/features/game/gamesApi';
 import { GameLi } from './GameLi';
-import { fetchAPIGames } from '@/features/game/gamesApi';
 
 export const Lobby = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const games = useSelector(selectFilteredGames);
   const error = useSelector(selectGamesAPIError);
   const loading = useSelector(selectIsLoadingGames);
-  
+  // initial load of games
   useEffect(() => {
-    // TODO: implement pagination and avoid fetching if data is already present
-    // TODO: implement enhenced fetch utility for reusing together with cancellation of fetch on unmount
-    async function fetchGames() {
-      dispatch(isLoadingGames(true));
-      // TODO: uri supporting category filter and pagination properly
-      try {
-        const items = await fetchAPIGames();
-        dispatch(loadedGames(items));
-      } catch (err: any) {
-        dispatch(gamesAPIError(err.message));
-      } finally {
-        dispatch(isLoadingGames(false));
-      }
-    }
-    fetchGames()
-  }, [])
+    dispatch(searchGames());
+  }, [dispatch]);
 
   return (
     <div className={styles.eventFeed}>

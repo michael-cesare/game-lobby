@@ -8,7 +8,7 @@ import { AvailableGames } from "@/components/AvailableGames"
 import { CategoryList } from "@/components/Categories"
 import { Lobby } from "@/components/Lobby"
 import { GameEvents } from "@/components/GameEvents"
-import { PageSize } from "@/components/PageSize";
+import { SearchForm } from "@/components/SearchForm";
 
 export default function HomePage() {
   return (
@@ -18,7 +18,7 @@ export default function HomePage() {
         <CategoryList style={{ marginBottom: "2rem" }} />  
         <AvailableGames />
         <Lobby />
-        <PageSize />
+        <SearchForm />
         <GameEvents />
       </div>
     </Provider>
