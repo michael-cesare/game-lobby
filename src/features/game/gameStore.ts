@@ -1,28 +1,7 @@
 import create from "zustand";
-import { TGameEvent, IGame } from "@/features/game/typings";
-import { mockSocket } from "@/services/socket";
 
-interface GameState {
-  games: IGame[];
-  events: TGameEvent[];
-  socketConnected: boolean;
-  setGames: (games: IGame[]) => void;
-  addEvent: (event: TGameEvent) => void;
-  resetEvents: () => void;
-  /**
-   * Establishes a WebSocket connection to receive real-time game events.
-   * If already connected or if there are no games, it does nothing.
-   * On receiving a game event, it adds the event to the state using the addEvent method.
-   * @returns void
-   */
-  connectSocket: (games: IGame[]) => void;
-  /**
-   *  Disconnects from the WebSocket and cleans up any listeners to prevent memory leaks.
-   *  If not connected, it does nothing.
-   * @returns void
-   */
-  disconnectSocket: () => void;
-}
+import { TGameEvent, GameState } from "@/features/game/typings";
+import { mockSocket } from "@/services/socket";
 
 /**
  * Zustand store for managing game state and real-time game events.

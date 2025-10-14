@@ -1,8 +1,7 @@
 import { gamesAPIError, isLoadingConfig, loadedConfig } from '@/features/lobby/actions';
 import type { AppDispatch } from '@/redux/createStore';
 import { IItems } from './typings';
-
-const API_BASE = 'https://casino.api.pikakasino.com/v1/pika';
+import { API_BASE } from './constants';
 
 export async function fetchCategories(): Promise<IItems[]> {
   const response = await fetch(
@@ -26,7 +25,7 @@ export async function fetchCategories(): Promise<IItems[]> {
     },
     name: item.name || {},
     type: item.type || "",
-    categoryFilter: item.categoryFilter || undefined,
+    categoryFilter: item.categoryFilter || '',
   }));
   return lobbyCategories;
 }

@@ -1,6 +1,8 @@
 import { CSSProperties, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
+import styles from './CategoryList.module.scss'
+
 import { selectConfig, selectConfigAPIError, selectIsLoadingConfig } from '@/features/lobby/selectors';
 
 import { CategoryTab } from './CategoryTab';
@@ -32,14 +34,14 @@ export const CategoryList = (props: IOwnProps) => {
       ) : error ? (
         <p>Error loading categories: {error}</p>
       ) : (
-        <ul>
+        <div className={styles.categoryList}>
           {categories.map((category) => (
             <CategoryTab
               key={category.id}
               category={category}
             />
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

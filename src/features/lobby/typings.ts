@@ -20,7 +20,7 @@ export interface IItems {
   /**
    * Category filter, e.g. "top", "new", "slots", "table", "jackpot", "live"
    */
-  categoryFilter?: string
+  categoryFilter: string
 }
 
 export interface IConfigLobby {
