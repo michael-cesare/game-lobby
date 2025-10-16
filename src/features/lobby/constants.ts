@@ -4,6 +4,7 @@ export const initialState: ILobbyState = {
     isLoadingGames: false,
     games: [],
     filteredGames: [],
+    filteredGameIds: [],
     isLoadingConfig: false,
     config: [],
     gameAPIError: null,

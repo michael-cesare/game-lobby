@@ -28,7 +28,7 @@ export const lobby = createReducer<ILobbyState>(
         state.isLoadingConfig = false;
       })
       .addCase(loadedConfig, (state, { payload }) => {
-        state.config = payload;
+        state.config = payload.filter((item) => item.name.en !== 'Lobby'); // Filter out 'Lobby' category
         state.isLoadingConfig = false;
       })
       .addCase(queryGames, (state, { payload }) => {
@@ -48,6 +48,7 @@ export const lobby = createReducer<ILobbyState>(
           filterGames(state, state.category);
         } else {
           state.filteredGames = payload;
+          state.filteredGameIds = payload.map((g) => g.id);
         }
       })
       .addCase(changeFilter, (state, { payload }) => {

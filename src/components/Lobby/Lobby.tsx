@@ -5,11 +5,11 @@ import styles from './Lobby.module.scss'
 
 import { AppDispatch } from '@/redux/createStore';
 import { searchGames } from '@/features/game/gamesApi';
-import { selectFilteredGames, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
+import { selectFilteredGameIds, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
 import { GameLi } from './GameLi';
 
 export const Lobby = () => {
-  const games = useSelector(selectFilteredGames);
+  const games = useSelector(selectFilteredGameIds);
   const error = useSelector(selectGamesAPIError);
   const loading = useSelector(selectIsLoadingGames);
   const dispatch = useDispatch<AppDispatch>();
@@ -33,8 +33,8 @@ export const Lobby = () => {
       ) : (
         <ul className={styles.eventList}>
           {games.map((game) => <GameLi
-            game={game}
-            key={game.id}
+            id={game}
+            key={game}
           /> )}
         </ul>
       )}
