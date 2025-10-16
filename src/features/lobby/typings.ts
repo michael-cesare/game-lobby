@@ -20,7 +20,7 @@ export interface IItems {
   /**
    * Category filter, e.g. "top", "new", "slots", "table", "jackpot", "live"
    */
-  categoryFilter?: string
+  categoryFilter: string
 }
 
 export interface IConfigLobby {
@@ -34,6 +34,8 @@ export interface ILobbyState {
   games: IGame[];
   /** List of games after applying filter on FE side */
   filteredGames: IGame[];
+  /** Applies reducer updates only when items changes within array, and used on react rendering list */
+  filteredGameIds: string[];
   gameAPIError: string | null;
   /** Lobby is loading config */
   isLoadingConfig: boolean;

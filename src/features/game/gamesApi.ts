@@ -2,8 +2,7 @@ import { IGame } from '@/features/game/typings';
 import { isEmpty } from '@/utils/primitive';
 import { gamesAPIError, queryGames, loadedGames } from '@/features/lobby/actions';
 import type { AppDispatch } from '@/redux/createStore';
-
-const API_BASE = 'https://casino.api.pikakasino.com/v1/pika';
+import { API_BASE } from './constants';
 
 /**
  * Fetch games from the API with optional pagination and search term.

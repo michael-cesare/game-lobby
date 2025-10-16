@@ -1,0 +1,11 @@
+// Dyanamic dimensions calculations: width, height, padding, border
+// uses rem convertion formula: px / 16 * unit
+// default unit is 1rem, can be changed by passing a second argument for smaller devices
+// example: units(32) = 2rem, units(32, 0.5rem) = 1rem
+// requires a base font-size of 16px on the html element
+// designers should use 16px as the base for their designs such as Figma or Zeplin
+// designs should use small devices unit of 12px for better scaling
+@function units($px, $unit: var(--unit, 1rem)) {
+  @return calc(#{$px} / 16 * #{$unit});
+}
+

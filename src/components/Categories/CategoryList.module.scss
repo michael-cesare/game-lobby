@@ -1,0 +1,29 @@
+.categoryList {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  background: white;
+
+  .categoryTab {
+    padding: 0 units(2);
+    margin: 0;
+    border-radius: units(.5);
+    cursor: pointer;
+    flex-direction: column;
+    gap: units(1);
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    transition: all 0.3s ease;
+
+    &.selected {
+      background: var(--primary-glow);
+      color: white;
+      box-shadow: 0 0 8px var(--primary-glow);
+    }
+  }
+}

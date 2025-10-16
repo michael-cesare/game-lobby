@@ -15,3 +15,9 @@ export const selectTotalGames = createSelector(
     return `${filtered} from ${total}`;
   }
 );
+
+// Addvanced query selector - gets a game by ID
+export const selectGame = ( gameId: string ) => createSelector(
+  [selectGames],
+  ( games ) => games.find( g => g.id === gameId )
+);

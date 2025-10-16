@@ -1,16 +1,22 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import Image from "next/image";
 
 import styles from './GameLi.module.scss'
 
-import { IGame } from '@/features/game/typings';
+import { selectGame } from '@/features/lobby/reselectors';
 
 interface IOwnProps {
-  game: IGame,
+  id: string; // game ID,
 }
 
 export const GameLi = ( props: IOwnProps ) => {
-  const { game } = props;
+  const { id } = props;
+
+  const game = useSelector(selectGame(id));
+  if (!game) {
+    return null;
+  }
 
   return (
     <li key={game.id} className={styles.gameLi}>

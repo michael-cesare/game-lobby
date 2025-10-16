@@ -1,0 +1,63 @@
+@import 'functions';
+
+// Colors
+// Use http://chir.ag/projects/name-that-color/ to generate the color names
+
+$transparent: rgba( 0 , 0 , 0 , 0 );
+
+$black: rgb( 0 , 0 , 0 );
+$black-0: rgba( 0 , 0 , 0 , 0 );
+$black-50: rgba( $black , 0.5 );
+
+$blue-zumthor: rgb( 235 , 242 , 255 );
+$blue-french-pass: rgb( 183 , 234 , 251 );
+$blue-pacific: rgb( 0 , 176 , 187 );
+$blue-curious: rgb( 45 , 148 , 200 );
+$blue-curious-40: rgba( $blue-curious, 0.4 );
+$blue-cerulean: rgb( 3 , 149 , 208 );
+$blue-dragonbonus:rgb( 42 , 164 , 202 );
+$blue-dragonbonus-border:rgba( 27 , 181 , 229 , 0.8 );
+$blue-malibu: rgb( 91 , 187 , 255 );
+$blue-dodger: rgb( 33 , 143 , 255 );
+$blue-clear: rgb( 36 , 138 , 235 );
+$blue-clear-80: rgba( $blue-clear , 0.8 );
+$blue-clear-60: rgba( $blue-clear , 0.6 );
+$blue-clear-50: rgba( $blue-clear , 0.5 );
+$blue-clear-30: rgba( $blue-clear , 0.3 );
+$blue-science: rgb( 3 , 71 , 199 );
+$blue-arapawa: rgb( 10 , 21 , 111 );
+$blue-dianne: rgb( 32 , 74 , 83 );
+$blue-stone: rgb( 2 , 89 , 101 );
+$blue-pacific-80: rgba( $blue-pacific , 0.8 );
+$blue-venice: rgb( 7 , 93 , 121 );
+$blue-prussian: rgb( 1 , 53 , 75 );
+$blue-lynch: rgb( 94 , 118 , 135 );
+
+$orange-candlelight: rgb( 250 , 225 , 28 );
+$orange-festival: rgb( 253 , 231 , 102 );
+$orange-bright-sun: rgb( 251 , 197 , 65 );
+$orange-gold: rgb( 255 , 210 , 0 );
+$orange-neon: rgb( 255 , 157 , 63 );
+$orange-koromiko: rgb( 255 , 184 , 91 );
+$orange-web: rgb( 255 , 163 , 1 );
+$orange-hot-toddy: rgb( 187 , 122 , 9 );
+$orange-tango: rgb( 234 , 130 , 27 );
+$orange-fire-bush: rgb( 229 , 151 , 35 );
+$orange-flush: rgb( 255 , 125 , 0 );
+$orange-web-25: rgba( $orange-web , 0.25 );
+$orange-web-50: rgba( $orange-web , 0.5 );
+$orange-web-80: rgba( $orange-web , 0.8 );
+$orange-blaze:rgb( 255 , 110 , 2 );
+$orange-clementine: rgb( 230 , 108 , 0 );
+$orange-flamingo: rgb( 233 , 84 , 35 );
+$orange-tall-poppy: rgb( 181 , 47 , 40 );
+$orange-pumpkin-skin: rgb( 191 , 96 , 10 );
+$orange-copper: rgb( 176 , 106 , 44 );
+$orange-bronze-hour: rgb( 135 , 85 , 26 );
+$orange-mocha: rgb( 116 , 46 , 24 );
+$orange-sandy-brown: rgb(71, 46, 19);
+
+// Theme variables
+$primary: $orange-web;
+$secondary: $blue-french-pass;
+$accent: $orange-web;

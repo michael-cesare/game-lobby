@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from "react-redux";
+import throttle from "lodash.throttle";
 
 import type { AppDispatch } from '@/redux/createStore';
 import { searchGames } from '@/features/game/gamesApi';
@@ -9,17 +10,36 @@ export const CountField = () => {
   const dispatch = useDispatch<AppDispatch>();
   const searchName = useSelector(selectSearchName);
 
-  const handleOnChange = useCallback(( newValue: string ) => {
-    const count = Number(newValue);
+  // Create a throttled version of the search function
+  const throttledSearch = useMemo(
+    () =>
+      throttle((newValue: string) => {
+        const count = Number(newValue);
 
-    // validation: only continue if valid
-    if (!newValue || isNaN(count) || count < 1 || count > 300) {
-      return;
-    }
-    dispatch(searchGames(count, searchName));
-  }, [dispatch, searchName]);
+        // validation: only continue if valid
+        if (!newValue || isNaN(count) || count < 1 || count > 300) {
+          return;
+        }
+        dispatch(searchGames(count, searchName));
+      }, 500, 
+      {
+        leading: false, trailing: true,
+      }), // 500ms throttle window (tweak as needed)
+    [dispatch, searchName]
+  );
+  
+  useEffect(() => {
+    return () => throttledSearch.cancel();
+  }, [throttledSearch]);
 
   return (
-    <input type="number" min="1" max="500" step="1" defaultValue="100" onBlur={(e) => handleOnChange(e.target.value)} />
+    <input
+      type="number"
+      min="1"
+      max="500"
+      step="1"
+      defaultValue="100"
+      onBlur={(e) => throttledSearch(e.target.value)}
+    />
   )
 }

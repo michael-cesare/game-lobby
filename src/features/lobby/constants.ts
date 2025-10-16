@@ -4,6 +4,7 @@ export const initialState: ILobbyState = {
     isLoadingGames: false,
     games: [],
     filteredGames: [],
+    filteredGameIds: [],
     isLoadingConfig: false,
     config: [],
     gameAPIError: null,
@@ -11,3 +12,5 @@ export const initialState: ILobbyState = {
     category: null,
     searchQuery: { name: '', pageSize: 100 },
 };
+
+export const API_BASE = 'https://casino.api.pikakasino.com/v1/pika';

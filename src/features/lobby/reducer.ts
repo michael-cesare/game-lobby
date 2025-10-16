@@ -1,4 +1,4 @@
-import { createReducer, Draft } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
 
 import { ILobbyState } from "./typings";
 import { initialState } from "./constants";
@@ -11,23 +11,7 @@ import {
     gamesAPIError,
     changeFilter,
 } from './actions';
-
-export const filterGames = (
-  state: Draft<ILobbyState>,
-  category: string | undefined,
-): void => {
-  if (category) {
-    // Assume that all games is equal to no filter since this is a FE only filter
-    if (category === 'allGames') {
-      state.filteredGames = state.games;
-      return;
-    }
-    const filterGames = state.games.filter((game) => game.meta?.category.includes(category));
-    // TODO - optimize filtered result to avoid unnecessary state updates and re-renders
-    // TODO - store ids of games for the selected cateogy and use memoized selector to get filtered games from state.games
-    state.filteredGames = filterGames;
-  }
-};
+import { filterGames } from "./reducerHandlers";
 
 export const lobby = createReducer<ILobbyState>(
   initialState,
@@ -44,7 +28,7 @@ export const lobby = createReducer<ILobbyState>(
         state.isLoadingConfig = false;
       })
       .addCase(loadedConfig, (state, { payload }) => {
-        state.config = payload;
+        state.config = payload.filter((item) => item.name.en !== 'Lobby'); // Filter out 'Lobby' category
         state.isLoadingConfig = false;
       })
       .addCase(queryGames, (state, { payload }) => {
@@ -64,6 +48,7 @@ export const lobby = createReducer<ILobbyState>(
           filterGames(state, state.category);
         } else {
           state.filteredGames = payload;
+          state.filteredGameIds = payload.map((g) => g.id);
         }
       })
       .addCase(changeFilter, (state, { payload }) => {
