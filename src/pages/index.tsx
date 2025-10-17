@@ -1,19 +1,20 @@
 import { PropsWithChildren } from 'react';
+import { useSelector } from 'react-redux';
 
-import './Home.module.scss'
+import styles from './Home.module.scss'
 
 import { wrapper } from "@/redux/createStore";
 
-import { AvailableGames } from "@/components/AvailableGames"
-import { CategoryList } from "@/components/Categories"
-import { Lobby } from "@/components/Lobby"
-import { GameEvents } from "@/components/GameEvents"
-import { SearchForm } from "@/components/SearchForm";
 import { fetchAPIGames } from '@/features/game/gamesApi';
 import { gamesAPIError, loadedConfig, loadedGames } from '@/features/lobby/actions';
 import { fetchCategories } from '@/features/lobby/configApi';
 import { selectConfigLoaded } from '@/features/lobby/selectors';
-import { useSelector } from 'react-redux';
+
+import { CategoryList } from "@/components/Categories"
+import { Lobby } from "@/components/Lobby"
+import { GameEvents } from "@/components/GameEvents"
+import { SearchForm } from "@/components/SearchForm";
+import { AvailableGames } from '@/components/AvailableGames';
 
 /**
  * A higher order component to prevent hydration errors
@@ -32,13 +33,19 @@ const GamesHOC = ({ children }: PropsWithChildren ) => {
 
 export const HomePage = () => {
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Casino Games Lobby</h1>     
-      <CategoryList style={{ marginBottom: "2rem" }} />  
+    <div className={styles.homeLobby}>
+      <div className={styles.sectionPad}>
+        <h1>Casino Games Lobby</h1>
+      </div>
       <AvailableGames />
-      <Lobby />
-      <SearchForm />
-      <GameEvents />
+      <div className={styles.lobbyContent}>
+        <CategoryList />  
+        <Lobby />
+      </div>
+      <div className={styles.sectionPad}>
+        <SearchForm />
+        <GameEvents />
+      </div>
     </div>
   )
 }

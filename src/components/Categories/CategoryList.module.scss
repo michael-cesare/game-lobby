@@ -1,29 +1,43 @@
-.categoryList {
+@import '@/styles/variables.scss';
+
+.categories {
+  height: auto; // the parent must use flex to fill available height
   display: flex;
-  flex-direction: row;
-  border: 1px solid #e1e5e9;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 2rem;
-  background: white;
+  padding: units(8);
 
-  .categoryTab {
-    padding: 0 units(2);
-    margin: 0;
-    border-radius: units(.5);
-    cursor: pointer;
-    flex-direction: column;
-    gap: units(1);
+  .categoryList {
+    height: 100%;
     display: flex;
-    align-items: center;
-    font-weight: 600;
-    color: var(--text-color-secondary);
-    transition: all 0.3s ease;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
 
-    &.selected {
-      background: var(--primary-glow);
-      color: white;
-      box-shadow: 0 0 8px var(--primary-glow);
+    .categoryTab {
+      padding: units(2) units(2);
+      min-width: 100%;
+      min-height: units(30);
+      border-radius: units(.5);
+      gap: units(1);
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      justify-items: left;
+      align-items: center;
+      align-content: center;
+      font-weight: 600;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+
+      .button {
+        padding: units(2) units(3.6);
+      }
+
+      &.selected {
+        background: var(--primary-glow);
+        color: white;
+        box-shadow: 0 0 8px var(--primary-glow);
+      }
     }
   }
 }

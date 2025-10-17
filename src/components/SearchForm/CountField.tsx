@@ -35,6 +35,7 @@ export const CountField = () => {
   return (
     <input
       type="number"
+      id="countField"
       min="1"
       max="500"
       step="1"

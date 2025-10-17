@@ -3,7 +3,11 @@ import classNames from 'classnames';
 
 import styles from './Button.module.scss'
 
-export type TButtonProps = JSX.IntrinsicElements['button'];
+import { EButtonVariants } from './typings';
+
+export type TButtonProps = {
+  variant?: EButtonVariants;
+} & JSX.IntrinsicElements['button'];
 
 /**
  * A generic Button component
@@ -11,14 +15,14 @@ export type TButtonProps = JSX.IntrinsicElements['button'];
  */
 export const Button = forwardRef<HTMLButtonElement, TButtonProps>( ( props ) => {
   const {
-    disabled, className,
+    disabled, className, variant = EButtonVariants.PRIMARY,
     onClick,
     ...rest
   } = props;
 
   const compProps = {
     disabled,
-    className: classNames( styles.button, className ),
+    className: classNames( styles.button, className, variant ),
     onClick,
     ...rest,
   };

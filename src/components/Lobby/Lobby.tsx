@@ -6,6 +6,7 @@ import styles from './Lobby.module.scss'
 import { AppDispatch } from '@/redux/createStore';
 import { searchGames } from '@/features/game/gamesApi';
 import { selectFilteredGameIds, selectGamesAPIError, selectIsLoadingGames } from '@/features/lobby/selectors';
+
 import { GameLi } from './GameLi';
 
 export const Lobby = () => {
@@ -23,7 +24,6 @@ export const Lobby = () => {
 
   return (
     <div className={styles.eventFeed}>
-      <h3>Game Cards</h3>
       {loading ? (
         <p>Loading games...</p>
       ) : error ? (

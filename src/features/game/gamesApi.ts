@@ -39,6 +39,7 @@ export async function fetchAPIGames(pageSize = 100, search = ''): Promise<IGame[
       category: item.meta?.category || "",
       collections: item.meta?.collections || [],
     },
+    provider: item.provider,
     media: {
       thumbnail: {
         thumbnail: {

@@ -18,18 +18,26 @@ export const GameLi = ( props: IOwnProps ) => {
     return null;
   }
 
+  const { media, meta, provider } = game;
+
   return (
-    <li key={game.id} className={styles.gameLi}>
+    <li key={id} className={styles.gameLi}>
       <div className={styles.gameCard}>
         <Image 
-          src={game.media.thumbnail.thumbnail.src} 
-          alt={game.meta.name}
+          src={media.thumbnail.thumbnail.src} 
+          alt={meta.name}
           className={styles.gameImage}
-          width={200}
-          height={200}
+          width={440}
+          height={440}
         />
-        <span className={styles.eventMessage}>{game.meta.name}</span>
-        <span>{game.meta.category}</span>
+        <div className={styles.gameInfo}>
+          <div>
+            <span className={styles.eventMessage}>{meta.name}</span>
+          </div>
+          <div>
+            <span>{`${provider} - ${game.meta.category}`}</span>
+          </div>
+        </div>
       </div>
     </li>
   )

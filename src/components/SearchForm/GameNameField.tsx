@@ -29,6 +29,7 @@ export const GameNameField = () => {
   return (
    <input
       type="text"
+      id="gameNameField"
       defaultValue=""
       placeholder="Search games..."
       onChange={(e) => throttledSearch(e.target.value)}
