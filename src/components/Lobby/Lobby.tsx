@@ -23,7 +23,7 @@ export const Lobby = () => {
   }, [games, dispatch]);
 
   return (
-    <div className={styles.eventFeed}>
+    <div className={styles.lobby}>
       {loading ? (
         <p>Loading games...</p>
       ) : error ? (
@@ -31,7 +31,7 @@ export const Lobby = () => {
       ) : games.length === 0 ? (
         <p>No games available</p>
       ) : (
-        <ul className={styles.eventList}>
+        <ul className={styles.lobby_games}>
           {games.map((game) => <GameLi
             id={game}
             key={game}

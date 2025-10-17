@@ -1,19 +1,14 @@
 import React from 'react'
 
+import styles from './GameEvents.module.scss'
+
 import { useGameEvents } from "@/hooks/useGameEvents"
 import { GameEvent } from './GameEvent'
 
 export const GameEvents = () => {
   const gameEvents = useGameEvents()
 
-  const ownStyles = {
-    marginTop: "2rem",
-    padding: "1rem",
-    border: "1px solid #ccc",
-    borderRadius: "8px"
-  }
-
-  return <div style={ownStyles}>
+  return <div className={styles.gameEvents}>
     <h3>Live Game Events ({gameEvents.length})</h3>
     {gameEvents.length === 0 ? (
       <p>No events yet</p>
