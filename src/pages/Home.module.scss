@@ -69,6 +69,7 @@
   font-family: var(--font-mono);
 }
 
+// TODO - add a grid view toggler to switch from list to grid
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(25%, auto));

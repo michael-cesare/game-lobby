@@ -1,5 +1,7 @@
 import React from 'react'
 
+import styles from './GameEvents.module.scss'
+
 import { TGameEvent } from '@/features/game/typings';
 
 interface IOwnProps {
@@ -9,7 +11,7 @@ interface IOwnProps {
 export const GameEvent = ( props: IOwnProps ) => {
   const { event } = props;
 
-  return <li style={{ marginBottom: "0.5rem" }}>
+  return <li className={styles.event}>
     {event.type}- Game ID: {event.gameId}
   </li>
 }

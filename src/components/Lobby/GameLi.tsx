@@ -32,7 +32,7 @@ export const GameLi = ( props: IOwnProps ) => {
         />
         <div className={styles.gameInfo}>
           <div>
-            <span className={styles.eventMessage}>{meta.name}</span>
+            <span className={styles.name}>{meta.name}</span>
           </div>
           <div>
             <span>{`${provider} - ${game.meta.category}`}</span>
