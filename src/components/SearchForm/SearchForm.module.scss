@@ -1,0 +1,10 @@
+@import '@/styles/variables.scss';
+
+.searchForm {
+  width: 100%;
+  padding: units(4);
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: stretch;
+}

@@ -1,0 +1,13 @@
+@import '@/styles/variables.scss';
+
+.availableGames {
+  width: 100%;
+  height: units( 32 );
+  padding: units(8) 0;
+  background-color: $primary;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color-secondary);
+}

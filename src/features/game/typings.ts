@@ -20,6 +20,7 @@ export interface IMetaGame {
 export interface IGame {
   id: string
   meta: IMetaGame
+  provider: string
   media: {
     thumbnail: {
       thumbnail: {

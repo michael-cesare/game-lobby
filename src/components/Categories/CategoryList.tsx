@@ -1,21 +1,21 @@
-import { CSSProperties, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import classNames from 'classnames';
 
 import styles from './CategoryList.module.scss'
 
+import { AppDispatch } from '@/redux/createStore';
 import { selectConfig, selectConfigAPIError, selectIsLoadingConfig } from '@/features/lobby/selectors';
+import { getConfig } from '@/features/lobby/configApi';
 
 import { CategoryTab } from './CategoryTab';
-import { AppDispatch } from '@/redux/createStore';
-import { getConfig } from '@/features/lobby/configApi';
 
 interface IOwnProps {
   className?: string;
-  style?: CSSProperties;
 }
 
 export const CategoryList = (props: IOwnProps) => {
-  const { className, style } = props;
+  const { className } = props;
   const dispatch = useDispatch<AppDispatch>();
   const categories = useSelector(selectConfig);
   const error = useSelector(selectConfigAPIError);
@@ -26,9 +26,10 @@ export const CategoryList = (props: IOwnProps) => {
     dispatch(getConfig());
   }, [dispatch]);
 
+  const ownClass = classNames( styles.categories, className )
+
   return (
-    <div className={className} style={style}>
-      <h2>Game Categories</h2>
+    <div className={ownClass}>
       {loading ? (
         <p>Loading categories...</p>
       ) : error ? (
